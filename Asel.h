@@ -35,13 +35,13 @@ namespace asel {
 		/// <para>管理するファイルから文字を読み込みます。</para>
 		/// </summary>
 		/// <param name="size">読み込む文字数</param>
-		Optional<String> read(size_t size) const;
+		s3d::Optional<s3d::String> read(size_t size) const;
 
 		/// <summary>
 		/// <para>管理するファイルに文字を書き込みます。</para>
 		/// </summary>
 		/// <param name="str">書き込む文字列</param>
-		bool write(const String& str);
+		bool write(const s3d::String& str);
 
 		/// <summary>管理しているファイルを無効にし、破棄します</summary>
 		void close() {
@@ -57,11 +57,11 @@ namespace asel {
 	public:
 		struct Info {
 			Handle procHandle = 0, threadHandle = 0;
-			uint32 procId = 0, threadId = 0;
+			s3d::uint32 procId = 0, threadId = 0;
 		};
 
 		//プロセスがまだ動作中であることを示す
-		static constexpr uint32 Running = 0x103ul;
+		static constexpr s3d::uint32 Running = 0x103ul;
 
 		Process() = default;
 		Process(Process&&) = default;
@@ -69,7 +69,7 @@ namespace asel {
 
 		/// <param name="path">実行ファイルのパス</param>
 		/// <param name="args">コマンドライン引数</param>
-		Process(const FilePath& path, const String& args);
+		Process(const s3d::FilePath& path, const s3d::String& args);
 
 		/// <summary>管理するプロセスを強制終了します。</summary>
 		/// <param name="exitCode">プロセスの終了コード</param>
@@ -80,7 +80,7 @@ namespace asel {
 		/// <para>プロセスが終了している場合: プロセスの終了コード</para>
 		/// <para>プロセスが動作中である場合: <c>Process::Running</c></para>
 		/// </returns>
-		uint32 getExitCode() const;
+		s3d::uint32 getExitCode() const;
 
 		bool isAlive() const noexcept {
 			return info_ != nullptr;
@@ -101,7 +101,7 @@ namespace asel {
 
 	};
 
-	enum class PipeAccess : uint32 {
+	enum class PipeAccess : s3d::uint32 {
 		//クライアントが書き込み、サーバーは読み取り
 		Inbound = 1,
 		//サーバーが読み込み、クライアントが書き込み
@@ -110,7 +110,7 @@ namespace asel {
 		Free = 3
 	};
 
-	enum class ConnectMode : uint32 {
+	enum class ConnectMode : s3d::uint32 {
 		//読み取り専用
 		Read = 1ul << 31,
 		//書き込み専用
@@ -145,7 +145,7 @@ namespace asel {
 	/// <param name="isRawName"><paramref name="serverName"/>がWinAPI準拠の名前になっているかどうか</param>
 	/// <remarks><c>mode</c>がアクセスするサーバーの設定と一致している必要があります。</remarks>
 	File connectServer(
-		const String& serverName,
+		const s3d::String& serverName,
 		ConnectMode mode,
 		bool isRawName = false
 		);
@@ -154,7 +154,7 @@ namespace asel {
 	/// <param name="isRawName"><paramref name="serverName"/>がWinAPI準拠の名前になっているかどうか</param>
 	/// <remarks>アクセスするサーバーのアクセス設定がFreeである必要があります。</remarks>
 	inline File connectServer(
-		const String& serverName,
+		const s3d::String& serverName,
 		bool isRawName = false
 		) {
 		return connectServer(serverName, ConnectMode::Free, isRawName);
@@ -170,7 +170,7 @@ namespace asel {
 		/// <param name="isRawName"><paramref name="name"/>がWinAPI準拠の形になっているかどうか</param>
 		/// <remarks>アクセスモードはFreeに設定されます。</remarks>
 		Server(
-			const String& name,
+			const s3d::String& name,
 			bool isRawName = false
 			) :
 			Server(
@@ -182,7 +182,7 @@ namespace asel {
 		/// <param name="mode">アクセスモードの種類</param>
 		/// <param name="isRawName"><paramref name="name"/>がWinAPI準拠の形になっているかどうか</param>
 		Server(
-			const String& name,
+			const s3d::String& name,
 			PipeAccess mode,
 			bool isRawName = false
 			);
@@ -231,7 +231,7 @@ namespace asel {
 		/// <summary>パイプ名を取得する。</summary>
 		/// <param name="doGetRaw">WinAPI準拠の本来の名前を取得するかどうか</param>
 		/// <returns><paramref name="doGetRaw"/>がtrueの場合、\\.\pipe\pipenameの形でパイプ名が返る。</returns>
-		String getName(bool doGetRaw = true) const noexcept {
+		s3d::String getName(bool doGetRaw = true) const noexcept {
 			return (
 				doGetRaw || name_.isEmpty
 				? name_
@@ -245,7 +245,7 @@ namespace asel {
 
 	private:
 		//保持するパイプ名
-		String name_;
+		s3d::String name_;
 		//パイプのハンドル
 		std::shared_ptr<Handle> pipe_;
 
