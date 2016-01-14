@@ -1,7 +1,7 @@
 # asel
 #### Azaika Siv3D Extention Library
 Siv3D上で動くオレオレ機能の集合です。適当に使ってください。  
-msvc2015で動作確認済みです。
+VS2015 Update1、Siv3D January 2016で動作確認済みです。
 
 ##### License
 wawlはNYSL Version 0.9982のもとで公開されます。  

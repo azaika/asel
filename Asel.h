@@ -56,8 +56,10 @@ namespace asel {
 	class Process {
 	public:
 		struct Info {
-			Handle procHandle = 0, threadHandle = 0;
-			s3d::uint32 procId = 0, threadId = 0;
+			Handle procHandle = 0;
+			Handle threadHandle = 0;
+			s3d::uint32 procId = 0;
+			s3d::uint32 threadId = 0;
 		};
 
 		//ƒvƒƒZƒX‚ª‚Ü‚¾“®ì’†‚Å‚ ‚é‚±‚Æ‚ğ¦‚·

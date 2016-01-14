@@ -19,8 +19,8 @@ namespace asel {
 					static_cast<uint32>(mode) | FILE_FLAG_OVERLAPPED,
 					PIPE_TYPE_BYTE,
 					PIPE_UNLIMITED_INSTANCES,
-					256,
-					256,
+					2048,
+					2048,
 					1000,
 					nullptr
 				)),
