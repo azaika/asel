@@ -69,6 +69,8 @@ namespace asel {
 		Process(Process&&) = default;
 		Process& operator = (Process&&) = default;
 
+		/// <param name="cmdLine">実行ファイルのパスを含むコマンドライン引数</param>
+		Process(const s3d::String& cmdLine);
 		/// <param name="path">実行ファイルのパス</param>
 		/// <param name="args">コマンドライン引数</param>
 		Process(const s3d::FilePath& path, const s3d::String& args);

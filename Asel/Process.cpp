@@ -5,29 +5,49 @@
 #include "../Asel.h"
 
 namespace asel {
-	namespace impl {
-		PROCESS_INFORMATION& ProcInfoToWinAPI(Process::Info& pi) {
-			return *reinterpret_cast<PROCESS_INFORMATION*>(&pi);
-		}
-	} //::asel::impl
+	Process::Process(const s3d::String & cmdLine) {
+		info_ = InfoPtr(new Info, &releaseInfo);
 
+		::STARTUPINFO si = {};
+		si.cb = sizeof(::STARTUPINFO);
+
+		if (
+			::CreateProcess(
+				cmdLine.c_str(),
+				nullptr,
+				nullptr,
+				nullptr,
+				false,
+				0,
+				nullptr,
+				nullptr,
+				&si,
+				reinterpret_cast<::PROCESS_INFORMATION*>(info_.get())
+				) == 0
+			)
+			info_.reset();
+	}
 	Process::Process(const FilePath& path, const String& args) {
-		SECURITY_ATTRIBUTES procSa = {}, threadSa = {};
-		procSa.nLength = sizeof(::SECURITY_ATTRIBUTES);
-		threadSa.nLength = sizeof(::SECURITY_ATTRIBUTES);
+		info_ = InfoPtr(new Info, &releaseInfo);
 
-		::CreateProcess(
-			path.c_str(),
-			const_cast<wchar_t*>(args.c_str()),
-			&procSa,
-			&threadSa,
-			false,
-			0,
-			nullptr,
-			nullptr,
-			nullptr,
-			&impl::ProcInfoToWinAPI(*info_)
-			);
+		::STARTUPINFO si = {};
+		si.cb = sizeof(::STARTUPINFO);
+
+		if (
+			::CreateProcess(
+				path.c_str(),
+				const_cast<wchar_t*>(args.c_str()),
+				nullptr,
+				nullptr,
+				false,
+				0,
+				nullptr,
+				nullptr,
+				&si,
+				reinterpret_cast<::PROCESS_INFORMATION*>(info_.get())
+				)
+			)
+			info_.reset();
 	}
 
 	bool Process::terminate(int exitCode) {
