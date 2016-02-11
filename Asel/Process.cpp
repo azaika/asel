@@ -20,7 +20,7 @@ namespace asel {
 				false,
 				0,
 				nullptr,
-				nullptr,
+				cmdLine.substr(0, cmdLine.lastIndexOf(L'/')).c_str(),
 				&si,
 				reinterpret_cast<::PROCESS_INFORMATION*>(info_.get())
 				) == 0
@@ -42,7 +42,7 @@ namespace asel {
 				false,
 				0,
 				nullptr,
-				nullptr,
+				path.substr(0, path.lastIndexOf(L'/')).c_str(),
 				&si,
 				reinterpret_cast<::PROCESS_INFORMATION*>(info_.get())
 				)
