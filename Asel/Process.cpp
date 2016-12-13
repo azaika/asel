@@ -42,7 +42,7 @@ namespace asel {
 				false,
 				0,
 				nullptr,
-				path.substr(0, cmdLine.lastIndexOf(L'/')).replace(L'/', L'\\').c_str(),
+				path.substr(0, path.lastIndexOf(L'/')).replace(L'/', L'\\').c_str(),
 				&si,
 				reinterpret_cast<::PROCESS_INFORMATION*>(info_.get())
 				)
