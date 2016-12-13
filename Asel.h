@@ -8,6 +8,8 @@
 #include <mutex>
 
 namespace asel {
+	using namespace s3d;
+
 	using Handle = void*;
 
 	namespace impl {
@@ -32,18 +34,18 @@ namespace asel {
 		}
 
 		/// <summary>
-		/// <para>ŠÇ—‚·‚éƒtƒ@ƒCƒ‹‚©‚ç•¶š‚ğ“Ç‚İ‚İ‚Ü‚·B</para>
+		/// <para>ç®¡ç†ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æ–‡å­—ã‚’èª­ã¿è¾¼ã¿ã¾ã™ã€‚</para>
 		/// </summary>
-		/// <param name="size">“Ç‚İ‚Ş•¶š”</param>
+		/// <param name="size">èª­ã¿è¾¼ã‚€æ–‡å­—æ•°</param>
 		s3d::Optional<s3d::String> read(size_t size) const;
 
 		/// <summary>
-		/// <para>ŠÇ—‚·‚éƒtƒ@ƒCƒ‹‚É•¶š‚ğ‘‚«‚İ‚Ü‚·B</para>
+		/// <para>ç®¡ç†ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã«æ–‡å­—ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚</para>
 		/// </summary>
-		/// <param name="str">‘‚«‚Ş•¶š—ñ</param>
+		/// <param name="str">æ›¸ãè¾¼ã‚€æ–‡å­—åˆ—</param>
 		bool write(const s3d::String& str);
 
-		/// <summary>ŠÇ—‚µ‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ–³Œø‚É‚µA”jŠü‚µ‚Ü‚·</summary>
+		/// <summary>ç®¡ç†ã—ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç„¡åŠ¹ã«ã—ã€ç ´æ£„ã—ã¾ã™</summary>
 		void close() {
 			file_.reset();
 		}
@@ -62,27 +64,27 @@ namespace asel {
 			s3d::uint32 threadId = 0;
 		};
 
-		//ƒvƒƒZƒX‚ª‚Ü‚¾“®ì’†‚Å‚ ‚é‚±‚Æ‚ğ¦‚·
+		//ãƒ—ãƒ­ã‚»ã‚¹ãŒã¾ã å‹•ä½œä¸­ã§ã‚ã‚‹ã“ã¨ã‚’ç¤ºã™
 		static constexpr s3d::uint32 Running = 0x103ul;
 
 		Process() = default;
 		Process(Process&&) = default;
 		Process& operator = (Process&&) = default;
 
-		/// <param name="cmdLine">Àsƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğŠÜ‚ŞƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”</param>
+		/// <param name="cmdLine">å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å«ã‚€ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°</param>
 		Process(const s3d::String& cmdLine);
-		/// <param name="path">Àsƒtƒ@ƒCƒ‹‚ÌƒpƒX</param>
-		/// <param name="args">ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”</param>
+		/// <param name="path">å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹</param>
+		/// <param name="args">ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°</param>
 		Process(const s3d::FilePath& path, const s3d::String& args);
 
-		/// <summary>ŠÇ—‚·‚éƒvƒƒZƒX‚ğ‹­§I—¹‚µ‚Ü‚·B</summary>
-		/// <param name="exitCode">ƒvƒƒZƒX‚ÌI—¹ƒR[ƒh</param>
+		/// <summary>ç®¡ç†ã™ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ã‚’å¼·åˆ¶çµ‚äº†ã—ã¾ã™ã€‚</summary>
+		/// <param name="exitCode">ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†ã‚³ãƒ¼ãƒ‰</param>
 		bool terminate(int exitCode = 0);
 
-		/// <summary>ŠÇ—‚·‚éƒvƒƒZƒX‚ÌI—¹ƒR[ƒh‚ğæ“¾‚µ‚Ü‚·B</summary>
+		/// <summary>ç®¡ç†ã™ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã—ã¾ã™ã€‚</summary>
 		/// <returns>
-		/// <para>ƒvƒƒZƒX‚ªI—¹‚µ‚Ä‚¢‚éê‡: ƒvƒƒZƒX‚ÌI—¹ƒR[ƒh</para>
-		/// <para>ƒvƒƒZƒX‚ª“®ì’†‚Å‚ ‚éê‡: <c>Process::Running</c></para>
+		/// <para>ãƒ—ãƒ­ã‚»ã‚¹ãŒçµ‚äº†ã—ã¦ã„ã‚‹å ´åˆ: ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†ã‚³ãƒ¼ãƒ‰</para>
+		/// <para>ãƒ—ãƒ­ã‚»ã‚¹ãŒå‹•ä½œä¸­ã§ã‚ã‚‹å ´åˆ: <c>Process::Running</c></para>
 		/// </returns>
 		s3d::uint32 getExitCode() const;
 
@@ -106,25 +108,25 @@ namespace asel {
 	};
 
 	enum class PipeAccess : s3d::uint32 {
-		//ƒNƒ‰ƒCƒAƒ“ƒg‚ª‘‚«‚İAƒT[ƒo[‚Í“Ç‚İæ‚è
+		//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒæ›¸ãè¾¼ã¿ã€ã‚µãƒ¼ãƒãƒ¼ã¯èª­ã¿å–ã‚Š
 		Inbound = 1,
-		//ƒT[ƒo[‚ª“Ç‚İ‚İAƒNƒ‰ƒCƒAƒ“ƒg‚ª‘‚«‚İ
+		//ã‚µãƒ¼ãƒãƒ¼ãŒèª­ã¿è¾¼ã¿ã€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒæ›¸ãè¾¼ã¿
 		Outbound = 2,
-		//©—R
+		//è‡ªç”±
 		Free = 3
 	};
 
 	enum class ConnectMode : s3d::uint32 {
-		//“Ç‚İæ‚èê—p
+		//èª­ã¿å–ã‚Šå°‚ç”¨
 		Read = 1ul << 31,
-		//‘‚«‚İê—p
+		//æ›¸ãè¾¼ã¿å°‚ç”¨
 		Write = 1ul << 30,
-		//©—R
+		//è‡ªç”±
 		Free = Read | Write
 	};
 
-	/// <summary>PipeAccess‚ğConnectMode‚É•ÏŠ·‚µ‚Ü‚·B</summary>
-	/// <param name="pa">•ÏŠ·Œ³‚ÌPipeAccess</param>
+	/// <summary>PipeAccessã‚’ConnectModeã«å¤‰æ›ã—ã¾ã™ã€‚</summary>
+	/// <param name="pa">å¤‰æ›å…ƒã®PipeAccess</param>
 	inline ConnectMode toConnectMode(PipeAccess pa) {
 		return (
 			pa == PipeAccess::Free ? ConnectMode::Free :
@@ -133,8 +135,8 @@ namespace asel {
 			);
 	}
 
-	/// <summary>ConnectMode‚ğPipeAccess‚É•ÏŠ·‚µ‚Ü‚·B</summary>
-	/// <param name="pa">•ÏŠ·Œ³‚ÌConnectMode</param>
+	/// <summary>ConnectModeã‚’PipeAccessã«å¤‰æ›ã—ã¾ã™ã€‚</summary>
+	/// <param name="pa">å¤‰æ›å…ƒã®ConnectMode</param>
 	inline PipeAccess toPipeAccess(ConnectMode pa) {
 		return (
 			pa == ConnectMode::Free ? PipeAccess::Free :
@@ -143,20 +145,20 @@ namespace asel {
 			);
 	}
 
-	/// <summary>ƒT[ƒo[(ƒpƒCƒv)‚ÉÚ‘±‚µ‚Ü‚·B</summary>
-	/// <param name="serverName">ƒT[ƒo[(ƒpƒCƒv)‚Ì–¼‘O</param>
-	/// <param name="mode">“Ç‚İ‘‚«ƒAƒNƒZƒX”ÍˆÍ</param>
-	/// <param name="isRawName"><paramref name="serverName"/>‚ªWinAPI€‹’‚Ì–¼‘O‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©</param>
-	/// <remarks><c>mode</c>‚ªƒAƒNƒZƒX‚·‚éƒT[ƒo[‚Ìİ’è‚Æˆê’v‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B</remarks>
+	/// <summary>ã‚µãƒ¼ãƒãƒ¼(ãƒ‘ã‚¤ãƒ—)ã«æ¥ç¶šã—ã¾ã™ã€‚</summary>
+	/// <param name="serverName">ã‚µãƒ¼ãƒãƒ¼(ãƒ‘ã‚¤ãƒ—)ã®åå‰</param>
+	/// <param name="mode">èª­ã¿æ›¸ãã‚¢ã‚¯ã‚»ã‚¹ç¯„å›²</param>
+	/// <param name="isRawName"><paramref name="serverName"/>ãŒWinAPIæº–æ‹ ã®åå‰ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹</param>
+	/// <remarks><c>mode</c>ãŒã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã‚µãƒ¼ãƒãƒ¼ã®è¨­å®šã¨ä¸€è‡´ã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚</remarks>
 	File connectServer(
 		const s3d::String& serverName,
 		ConnectMode mode,
 		bool isRawName = false
 		);
-	/// <summary>ƒT[ƒo[(ƒpƒCƒv)‚ÉÚ‘±‚µ‚Ü‚·B</summary>
-	/// <param name="serverName">ƒT[ƒo[(ƒpƒCƒv)‚Ì–¼‘O</param>
-	/// <param name="isRawName"><paramref name="serverName"/>‚ªWinAPI€‹’‚Ì–¼‘O‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©</param>
-	/// <remarks>ƒAƒNƒZƒX‚·‚éƒT[ƒo[‚ÌƒAƒNƒZƒXİ’è‚ªFree‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B</remarks>
+	/// <summary>ã‚µãƒ¼ãƒãƒ¼(ãƒ‘ã‚¤ãƒ—)ã«æ¥ç¶šã—ã¾ã™ã€‚</summary>
+	/// <param name="serverName">ã‚µãƒ¼ãƒãƒ¼(ãƒ‘ã‚¤ãƒ—)ã®åå‰</param>
+	/// <param name="isRawName"><paramref name="serverName"/>ãŒWinAPIæº–æ‹ ã®åå‰ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹</param>
+	/// <remarks>ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã‚µãƒ¼ãƒãƒ¼ã®ã‚¢ã‚¯ã‚»ã‚¹è¨­å®šãŒFreeã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚</remarks>
 	inline File connectServer(
 		const s3d::String& serverName,
 		bool isRawName = false
@@ -170,9 +172,9 @@ namespace asel {
 		Server(Server&&) = default;
 		Server& operator = (Server&&) = default;
 
-		/// <param name="name">¶¬‚·‚éƒpƒCƒv‚Ì–¼‘O</param>
-		/// <param name="isRawName"><paramref name="name"/>‚ªWinAPI€‹’‚ÌŒ`‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©</param>
-		/// <remarks>ƒAƒNƒZƒXƒ‚[ƒh‚ÍFree‚Éİ’è‚³‚ê‚Ü‚·B</remarks>
+		/// <param name="name">ç”Ÿæˆã™ã‚‹ãƒ‘ã‚¤ãƒ—ã®åå‰</param>
+		/// <param name="isRawName"><paramref name="name"/>ãŒWinAPIæº–æ‹ ã®å½¢ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹</param>
+		/// <remarks>ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã¯Freeã«è¨­å®šã•ã‚Œã¾ã™ã€‚</remarks>
 		Server(
 			const s3d::String& name,
 			bool isRawName = false
@@ -182,9 +184,9 @@ namespace asel {
 				PipeAccess::Free,
 				isRawName
 				) {}
-		/// <param name="name">¶¬‚·‚éƒpƒCƒv‚Ì–¼‘O</param>
-		/// <param name="mode">ƒAƒNƒZƒXƒ‚[ƒh‚Ìí—Ş</param>
-		/// <param name="isRawName"><paramref name="name"/>‚ªWinAPI€‹’‚ÌŒ`‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©</param>
+		/// <param name="name">ç”Ÿæˆã™ã‚‹ãƒ‘ã‚¤ãƒ—ã®åå‰</param>
+		/// <param name="mode">ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã®ç¨®é¡</param>
+		/// <param name="isRawName"><paramref name="name"/>ãŒWinAPIæº–æ‹ ã®å½¢ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹</param>
 		Server(
 			const s3d::String& name,
 			PipeAccess mode,
@@ -195,33 +197,33 @@ namespace asel {
 			return pipe_ != nullptr;
 		}
 
-		/// <summary>ƒNƒ‰ƒCƒAƒ“ƒg‚Ö‚Ì‰“š‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”‚ğİ’è‚µ‚Ü‚·B</summary>
-		/// <param name="f">ƒT[ƒo[‚Ì‰“š‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”</param>
+		/// <summary>ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¸ã®å¿œç­”æ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°ã‚’è¨­å®šã—ã¾ã™ã€‚</summary>
+		/// <param name="f">ã‚µãƒ¼ãƒãƒ¼ã®å¿œç­”æ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°</param>
 		void reaction(const std::function<void(File&)>& f) {
 			reaction_ = f;
 		}
 
-		/// <summary>ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌÚ‘±‘Ò‹@‚ğŠJn‚µ‚Ü‚·B</summary>
+		/// <summary>ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®æ¥ç¶šå¾…æ©Ÿã‚’é–‹å§‹ã—ã¾ã™ã€‚</summary>
 		void start();
-		/// <summary>ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌÚ‘±‘Ò‹@‚ğŠJn‚µ‚Ü‚·B</summary>
-		/// <param name="f">ƒT[ƒo[‚Ì‰“š‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”</param>
+		/// <summary>ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®æ¥ç¶šå¾…æ©Ÿã‚’é–‹å§‹ã—ã¾ã™ã€‚</summary>
+		/// <param name="f">ã‚µãƒ¼ãƒãƒ¼ã®å¿œç­”æ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°</param>
 		void start(const std::function<void(File&)>& f) {
 			reaction(f);
 			start();
 		}
 
-		/// <summary>ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌÚ‘±‘Ò‹@ó‘Ô‚ğ’â~‚µ‚Ü‚·B</summary>
+		/// <summary>ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®æ¥ç¶šå¾…æ©ŸçŠ¶æ…‹ã‚’åœæ­¢ã—ã¾ã™ã€‚</summary>
 		void stop() {
 			pipe_.reset();
 		}
 
-		/// <summary>ƒT[ƒo[‚Ìó‘Ô‚ğXV‚µAƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌÚ‘±‚ª‚ ‚Á‚½ê‡‚Í‰“š‚µ‚Ü‚·B</summary>
+		/// <summary>ã‚µãƒ¼ãƒãƒ¼ã®çŠ¶æ…‹ã‚’æ›´æ–°ã—ã€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®æ¥ç¶šãŒã‚ã£ãŸå ´åˆã¯å¿œç­”ã—ã¾ã™ã€‚</summary>
 		bool update();
 
-		/// <summary>Œ»İÚ‘±‚µ‚Ä‚¢‚éƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‹­§Ø’f‚µ‚Ü‚·B</summary>
+		/// <summary>ç¾åœ¨æ¥ç¶šã—ã¦ã„ã‚‹ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰å¼·åˆ¶åˆ‡æ–­ã—ã¾ã™ã€‚</summary>
 		bool disconnect();
 
-		/// <summary>ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌÚ‘±‚ª‚ ‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚Ü‚·B</summary>
+		/// <summary>ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®æ¥ç¶šãŒã‚ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã¾ã™ã€‚</summary>
 		bool hasConnected() const {
 			bool ret;
 			{
@@ -232,9 +234,9 @@ namespace asel {
 			return ret;
 		}
 
-		/// <summary>ƒpƒCƒv–¼‚ğæ“¾‚·‚éB</summary>
-		/// <param name="doGetRaw">WinAPI€‹’‚Ì–{—ˆ‚Ì–¼‘O‚ğæ“¾‚·‚é‚©‚Ç‚¤‚©</param>
-		/// <returns><paramref name="doGetRaw"/>‚ªtrue‚Ìê‡A\\.\pipe\pipename‚ÌŒ`‚ÅƒpƒCƒv–¼‚ª•Ô‚éB</returns>
+		/// <summary>ãƒ‘ã‚¤ãƒ—åã‚’å–å¾—ã—ã¾ã™ã€‚</summary>
+		/// <param name="doGetRaw">WinAPIæº–æ‹ ã®æœ¬æ¥ã®åå‰ã‚’å–å¾—ã™ã‚‹ã‹ã©ã†ã‹</param>
+		/// <returns><paramref name="doGetRaw"/>ãŒtrueã®å ´åˆã€\\.\pipe\pipenameã®å½¢ã§ãƒ‘ã‚¤ãƒ—åãŒè¿”ã‚‹ã€‚</returns>
 		s3d::String getName(bool doGetRaw = true) const noexcept {
 			return (
 				doGetRaw || name_.isEmpty
@@ -248,21 +250,31 @@ namespace asel {
 		~Server();
 
 	private:
-		//•Û‚·‚éƒpƒCƒv–¼
+		//ä¿æŒã™ã‚‹ãƒ‘ã‚¤ãƒ—å
 		s3d::String name_;
-		//ƒpƒCƒv‚Ìƒnƒ“ƒhƒ‹
+		//ãƒ‘ã‚¤ãƒ—ã®ãƒãƒ³ãƒ‰ãƒ«
 		std::shared_ptr<Handle> pipe_;
 
 		std::function<void(File&)> reaction_;
 
 		mutable std::mutex mtx_;
-		//Ú‘±‘Ò‚¿ƒXƒŒƒbƒh
+		//æ¥ç¶šå¾…ã¡ã‚¹ãƒ¬ãƒƒãƒ‰
 		std::thread waitConnect_;
-		//Ú‘±‘Ò‚¿Event—pHandle
-		//0: ‘Ò‹@—p, 1:‹­§I—¹—p
+		//æ¥ç¶šå¾…ã¡Eventç”¨Handle
+		//0: å¾…æ©Ÿç”¨, 1:å¼·åˆ¶çµ‚äº†ç”¨
 		impl::HandlePtr events_[2] = { {nullptr, impl::releaseHandle}, {nullptr, impl::releaseHandle} };
 		bool hasConnected_ = false;
 
 	};
+
+
+	struct FileOpenResult {
+		String directory;
+		Array<String> files;
+	};
+
+	/// <summary>è¤‡æ•°ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠã§ãã‚‹ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’å‡ºã—ã¾ã™ã€‚</summary>
+	/// <param name="bufSize">å†…éƒ¨çš„ãªãƒãƒƒãƒ•ã‚¡ã®å¤§ãã•</param>
+	Optional<FileOpenResult> dialogOpenMultiFile(std::uint32_t bufSize = 256);
 
 } //::asel

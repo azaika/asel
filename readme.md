@@ -1,11 +1,11 @@
 # asel
-#### Azaika Siv3D Extention Library
-Siv3D��œ����I���I���@�\�̏W���ł��B�K���Ɏg���Ă��������B  
-VS2015 Update1�ASiv3D January 2016�œ���m�F�ς݂ł��B
+## Azaika Siv3D Extention Library
+Siv3D上で動くオレオレ機能の集合です。適当に使ってください。  
+VS2015 Update2、Siv3D August 2016 で動作確認済みです。
 
-##### License
-wawl��NYSL Version 0.9982�̂��ƂŌ��J����܂��B  
-NYSL�̏ڍׂɊւ��Ă�<http://www.kmonos.net/nysl/>���Q�Ƃ��Ă��������B
+### License
+wawlはNYSL Version 0.9982のもとで公開されます。  
+NYSLの詳細に関しては<http://www.kmonos.net/nysl/>を参照してください。
 - - -
 
-���̃��C�u�����Ɋւ���A����[���twitter](http://www.twitter.com/azaika_)�܂ł��肢���܂��B
+このライブラリに関する連絡は[作者twitter](http://www.twitter.com/azaika_)までお願いします。
