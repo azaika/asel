@@ -33,7 +33,7 @@ namespace asel {
 		return File(pipe);
 	}
 
-	Optional<FileOpenResult> dialogOpenMultiFile(uint32 bufSize = 256) {
+	Optional<FileOpenResult> dialogOpenMultiFile(uint32 bufSize) {
 		String pathes;
 		pathes.resize(bufSize);
 

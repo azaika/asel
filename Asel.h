@@ -277,4 +277,4 @@ namespace asel {
 	/// <param name="bufSize">内部的なバッファの大きさ</param>
 	Optional<FileOpenResult> dialogOpenMultiFile(std::uint32_t bufSize = 256);
 
-} //::asel
+} // ::asel
